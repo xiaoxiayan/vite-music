@@ -1,0 +1,24 @@
+{
+    "navList":[
+        {
+            "name": "发现音乐",
+            "router":""
+        },
+        {
+            "name": "我的音乐",
+            "router":""
+        },
+        {
+            "name": "朋友",
+            "router":""
+        },
+        {
+            "name": "商城",
+            "router":""
+        },
+        {
+            "name": "音乐人",
+            "router":""
+        }
+    ]
+}

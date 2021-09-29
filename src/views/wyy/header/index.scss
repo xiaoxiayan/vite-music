@@ -1,0 +1,48 @@
+.myheader{
+    height: 70px;
+    box-sizing: border-box;
+    background: #242424;
+    border-bottom: 1px solid #000;
+    line-height: 70px;
+    text-align: center;
+    .active{
+        background: #000;
+        text-decoration: none;
+        color: #fff;
+    }
+    .warp-header{
+        width: 1200px;
+        display: inline-block;
+        height: 100%;
+        .logo{
+            width: 100px;
+            height: 30px;
+            background-image: url(@/assets/img/logo.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            float: left;
+        }
+        .navList{
+            height: 70px;
+            .nav{
+                float: left;
+                cursor: pointer;
+                padding: 0 19px;
+                text-align: center;
+                height: 100%;
+                line-height: 70px;
+                color: #ccc;
+                &:hover{
+                    background: #000;
+                    text-decoration: none;
+                    color: #fff;
+                }
+            }
+
+        }
+
+    }
+
+
+}
