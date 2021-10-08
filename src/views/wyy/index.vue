@@ -29,6 +29,6 @@ const tagClick = (index: number) => {
 </script>
 
 <style scoped>
- @import "./index.scss"
+ @import "./index.less"
 
 </style>

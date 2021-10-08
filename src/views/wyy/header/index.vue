@@ -17,19 +17,37 @@
           {{ item.name }}
         </li>
       </ul>
+      <!-- 搜索 -->
+      <div class="search">
+       <el-autocomplete
+        v-model="searchVal"
+        :fetch-suggestions="querySearchAsync"
+        placeholder="Please input"
+        @select="handleSelect"
+      />
+      </div>
       <div class="user">
-        <!-- 用户头像 -->
-        <div />
+        <!-- 用户头像,如果有登陆就使用头像，如果没有就使用 文字 -->
+          <div v-if="isLogin">
+             <img :src="userInfo.avatarUrl" alt="">
+          </div>
+          <div v-else>
+              <span class="loginBtn">登陆</span>
+          </div>
       </div>
     </div>
   </div>
 </template>
 <script lang='ts' setup>
-import { ref, defineEmits } from 'vue'
-import testJson from './navlist.json'
+import { ref, defineEmits, computed } from 'vue'
+import testJson from './navList.json'
+import $store from '@/store'
+const isLogin = computed(() => $store.state.isLogin)
+const userInfo = computed(() => $store.state.userInfo)
 const emits = defineEmits(['tagclick'])
 const navList = testJson.navList
 const active = ref(0)
+
 function navAction (index:any) {
   active.value = index
   // 需要emit 出去一个 router
@@ -38,16 +56,34 @@ function navAction (index:any) {
 const logoClick = () => {
   console.log('cccccc')
 }
-interface person {
-  name: string
-  age: number
+// 搜索模块
+let timeout:any
+const searchVal = ref('')
+const links = ref([])
+const querySearchAsync = (queryString: string, cb: (arg: any) => void) => {
+  const results = queryString
+    ? links.value.filter(createFilter(queryString))
+    : links.value
+
+  clearTimeout(timeout)
+  timeout = setTimeout(() => {
+    cb(results)
+  }, 3000 * Math.random())
 }
-const man = (parmas:person) => {
-  console.log('aaa')
+const createFilter = (queryString: string) => {
+  return (restaurant) => {
+    return (
+      restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) ===
+          0
+    )
+  }
 }
-man('aaa')
+const handleSelect = (item) => {
+  console.log(item)
+}
+
 </script>
-<style scoped lang="scss">
-@import './index.scss';
+<style scoped lang="less">
+@import './index.less';
 
 </style>

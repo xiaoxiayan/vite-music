@@ -7,13 +7,13 @@
         </div>
         <div class="menusRight">
             <div class="listDetail" v-for="item,index in dataList.list" :key="index">
-                  <div class="title"> {{item.name}}</div>  
+                  <div class="title"> {{item.name}}</div>
                   <div class="content">
                     <div class="detail" v-for="el,index in item.menuList" :key="index">
                         <img :src="el.pic">
                         <div></div>
                     </div>
-                  </div>  
+                  </div>
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@ export default defineComponent(
 )
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
     .contentBox{
         height: 100%;
         display: flex;
@@ -119,7 +119,7 @@ export default defineComponent(
         }
         .active{
             background-color: blueviolet;
-        
+
         }
     }
 

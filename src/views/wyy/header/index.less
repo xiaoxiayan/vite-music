@@ -4,7 +4,8 @@
     background: #242424;
     border-bottom: 1px solid #000;
     line-height: 70px;
-    text-align: center;
+    display: flex;
+    justify-content:center;
     .active{
         background: #000;
         text-decoration: none;
@@ -12,12 +13,15 @@
     }
     .warp-header{
         width: 1200px;
-        display: inline-block;
+        display: flex;
         height: 100%;
+        justify-content: space-between;
+        box-sizing: border-box;
         .logo{
             width: 100px;
-            height: 30px;
-            background-image: url(@/assets/img/logo.png);
+            height: 70px;
+            margin: 0 15px;
+            background-image: url(~@/assets/img/logo.png);
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
@@ -25,6 +29,9 @@
         }
         .navList{
             height: 70px;
+            min-width: 400px;
+            clear: both;
+            display: inline-block;
             .nav{
                 float: left;
                 cursor: pointer;
@@ -40,6 +47,27 @@
                 }
             }
 
+        }
+        .search {
+            display: inline-block;
+        }
+        .user {
+            img{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+            .loginBtn {
+                display: inline-block;
+                width: 50px;
+                height: 30px;
+                border-radius: 5px;
+                border:  1px solid #fff;
+                text-align: center;
+                line-height: 30px;
+                color: #fff;
+                cursor: pointer;
+            }
         }
 
     }
