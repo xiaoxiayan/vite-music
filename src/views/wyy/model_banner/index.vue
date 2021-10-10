@@ -1,7 +1,7 @@
 <template>
   <el-carousel :interval="4000"  type="card" height="300px" :initial-index="0" >
     <el-carousel-item v-for="item,index in bannerList" :key="index">
-    
+
     <!-- <pre> {{ item }} </pre> -->
        <img style="width: 100%; height: 100%;" :src="item.imageUrl">
        <!-- <h1 style="color:black"> {{item.imageUrl}} </h1> -->
@@ -9,25 +9,23 @@
   </el-carousel>
 </template>
 <script lang='ts' setup>
-import axios from "@/server/axios";
+import axios from '@/server/axios'
 import { ref, reactive, toRefs, onBeforeMount, onMounted } from 'vue'
-   let bannerList = ref<any[]>([{},{},{}])
-   const numTest = [{
-     name:1
-   },{
-     name:2
-   }]
+const bannerList = ref<any[]>([{}, {}, {}])
+const numTest = [{
+  name: 1
+}, {
+  name: 2
+}]
 
-  axios({
-  url:'bannerList',
-  method:'get',
-  data:{}
-  }).then(res => {
-    bannerList.value  = res.banners
-    console.log(bannerList,';bannerlist');
-  
+axios({
+  url: 'bannerList',
+  method: 'get',
+  data: {}
+}).then(res => {
+  bannerList.value = res.banners
+  console.log(bannerList, ';bannerlist')
 })
-
 
 </script>
 <style scoped>

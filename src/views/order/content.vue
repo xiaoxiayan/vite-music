@@ -19,36 +19,34 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref , PropType , reactive } from 'vue'
+import { defineComponent, ref, PropType, reactive } from 'vue'
 import { httpMenuProps } from '@/server/appServe'
-//定义一个接口，设置一下props 传入的数据要有的类型，
-
+// 定义一个接口，设置一下props 传入的数据要有的类型，
 
 export default defineComponent(
-    {
-    name:"menus",
-    props:{
-        dataList:{
-            type : Object as PropType<httpMenuProps>,
-            required: true
-        }
+  {
+    name: 'menus',
+    props: {
+      dataList: {
+        type: Object as PropType<httpMenuProps>,
+        required: true
+      }
     },
-    setup(props){
-        // watch(dataList, () => {
-        // })
-        const active = ref()
-        const listAction = (index:number):void =>{
-             active.value = index
-        }
-        const data = reactive({
-            active
-        })
-        return {
-            active,
-            listAction
-        }
-
-    },
+    setup (props) {
+      // watch(dataList, () => {
+      // })
+      const active = ref()
+      const listAction = (index:number):void => {
+        active.value = index
+      }
+      const data = reactive({
+        active
+      })
+      return {
+        active,
+        listAction
+      }
+    }
     // watch:{
     //     dataList:{
     //         handler:function(newVal,oldVal){
@@ -73,7 +71,7 @@ export default defineComponent(
     // },
     // mounted(){
     // }
-}
+  }
 
 )
 </script>

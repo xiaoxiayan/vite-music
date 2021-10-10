@@ -5,18 +5,17 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-    name:'test-child',
-    props:{
-        fatherNum:Number,
-        fatherObj:Number
-        
-    },
-    setup(props){
-        console.log('childProps==>',props)
+  name: 'test-child',
+  props: {
+    fatherNum: Number,
+    fatherObj: Number
 
-    }
+  },
+  setup (props) {
+    console.log('childProps==>', props)
+  }
 }
 </script>
 

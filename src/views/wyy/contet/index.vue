@@ -6,12 +6,12 @@
 import { reactive, toRefs, onBeforeMount, onMounted } from 'vue'
 export default {
   name: '',
-  setup() {
+  setup () {
     const data = reactive({})
     return {
-      ...toRefs(data),
+      ...toRefs(data)
     }
-  },
+  }
 }
 
 </script>
