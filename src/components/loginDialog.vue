@@ -16,6 +16,8 @@
 
 <script lang='ts' setup>
 import { ref, toRefs, onBeforeMount, onMounted } from 'vue'
+import $store from '@/store'
+
 interface loginInfo {
   myphone: string,
   passWord: string
