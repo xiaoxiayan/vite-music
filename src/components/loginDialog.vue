@@ -27,6 +27,16 @@ const formData = ref<loginInfo>({
   passWord: ''
 })
 
+const testFn = (data:loginInfo):boolean => {
+  let dataLength = null
+  if (data) {
+    dataLength = Object.keys(data).length
+    return !!dataLength
+  } else {
+    return false
+  }
+}
+
 </script>
 <style scoped lang='less'>
 </style>
