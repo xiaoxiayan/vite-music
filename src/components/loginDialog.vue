@@ -1,6 +1,6 @@
 <template>
   <!-- 登陆组件 -->
-  <teleport to="#loginDialog">
+  <div id="loginDialog">
     <el-dialog title="登陆">
       <el-form ref="form" :model="formData">
         <el-form-item label="Activity name">
@@ -10,8 +10,11 @@
           <el-input v-model="formData.myphone"></el-input>
         </el-form-item>
       </el-form>
-    </el-dialog>
-  </teleport>
+      <el-button class="action" @click="count++">确定</el-button>
+      <el-button class="cancel">取消</el-button>
+      <span>Count: {{ count }} </span>
+   </el-dialog>
+  </div>
 </template>
 
 <script lang='ts' setup>
@@ -26,7 +29,7 @@ const formData = ref<loginInfo>({
   myphone: '',
   passWord: ''
 })
-
+const count = ref(0)
 const testFn = (data:loginInfo):boolean => {
   let dataLength = null
   if (data) {
