@@ -35,6 +35,8 @@
 </template>
 <script lang='ts' setup>
 import { ref, defineEmits, computed } from 'vue'
+import axios from '@/server/axios'
+
 import testJson from './navList.json'
 import $store from '@/store'
 const isLogin = computed(() => $store.state.userInfo)
@@ -79,6 +81,10 @@ const loginAction = () => {
 const handleSelect = (item) => {
   console.log(item)
 }
+
+//   pageData.menusList = data
+
+// console.log(menusList,'2222');
 
 </script>
 <style scoped lang="less">

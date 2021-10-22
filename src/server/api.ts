@@ -45,7 +45,7 @@ export interface apiKeyDataType {
    'bannerList': {
        code:number,
        banners:[]
-   }
+   },
 
 }
 
