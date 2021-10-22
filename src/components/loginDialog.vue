@@ -34,18 +34,19 @@ const count = ref(0)
 const verify = (data: loginInfo): boolean => {
   if (data.myphone === '') {
     ElMessage.error('手机号不能为空')
+    return false
   }
-  if (data.passWord === '') [
+  if (data.passWord === '') {
     ElMessage.error('密码不能为空')
-  ]
+    return false
+  }
+  return true
 }
 const login = (data: loginInfo): void => {
   let dataLength = null
   if (data) {
     dataLength = Object.keys(data).length
-    return !!dataLength
   } else {
-    return false
   }
 }
 
