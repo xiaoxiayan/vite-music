@@ -53,10 +53,14 @@ export interface MenuListProps {
 }
 
 export interface httpMenuProps {
-    list:MenuListProps[]
+    list: MenuListProps[]
 }
 
 export interface artistList {
-    cat:number,
-    initial?:string
+    cat: number,
+    initial?: string
+}
+export interface loginInfo {
+    myphone: string,
+    passWord: string
 }

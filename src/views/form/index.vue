@@ -42,14 +42,14 @@ export default {
     validateInput,
     validateForm
   },
-  setup(): any {
+  setup ():any {
     const inputRef = ref<any>()
     const emailRules: RulesProp = [
       { type: 'required', message: '电子邮箱地址不能为空' },
       { type: 'email', message: '请输入正确的电子邮箱格式' }
 
     ]
-    const phoneRules: = []
+    const phoneRules = []
     const passWordRules: RulesProp = [
       { type: 'required', message: '密码不能为空' }
     ]
@@ -59,7 +59,7 @@ export default {
     const emailVal = ref('123@qq.com')
     const emailPassword = ref('')
     const toData = toRefs(formData)
-    const emailReg = /^([\w\.\-]+)\@(\w+)(\.([\w^\_]+)){1,2}$/
+    // const emailReg = /^([\w\.\-]+)\@(\w+)(\.([\w^\_]+)){1,2}$/
     const onFormSubmit = (val: boolean) => {
     }
     return {

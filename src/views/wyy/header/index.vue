@@ -27,7 +27,7 @@
           <img :src="userInfo.avatarUrl" alt />
         </div>
         <div v-else>
-          <span class="loginBtn">登陆</span>
+          <span class="loginBtn" @click="loginAction">登陆</span>
         </div>
       </div>
     </div>
@@ -37,14 +37,12 @@
 import { ref, defineEmits, computed } from 'vue'
 import testJson from './navList.json'
 import $store from '@/store'
-
 const isLogin = computed(() => $store.state.isLogin)
 const userInfo = computed(() => $store.state.userInfo)
 const emits = defineEmits(['tagclick'])
 const navList = testJson.navList
 const active = ref(0)
-
-function navAction(index: any) {
+function navAction (index: any) {
   active.value = index
   // 需要emit 出去一个 router
   emits('tagclick', index)
@@ -73,6 +71,10 @@ const createFilter = (queryString: string) => {
       0
     )
   }
+}
+const loginAction = () => {
+  console.log(isLogin)
+  // 调取 登陆组件
 }
 const handleSelect = (item) => {
   console.log(item)
