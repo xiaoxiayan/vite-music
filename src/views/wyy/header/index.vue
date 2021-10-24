@@ -31,14 +31,19 @@
         </div>
       </div>
     </div>
+    <loginDialog class="logindDialogbox"></loginDialog>
   </div>
 </template>
+
 <script lang='ts' setup>
+import loginDialog from '@/components/loginDialog.vue'
 import { ref, defineEmits, computed } from 'vue'
 import testJson from './navList.json'
 import $store from '@/store'
+
 const isLogin = computed(() => $store.state.isLogin)
 const userInfo = computed(() => $store.state.userInfo)
+const openBox = computed(() => $store.state.openBox)
 const emits = defineEmits(['tagclick'])
 const navList = testJson.navList
 const active = ref(0)
@@ -73,14 +78,15 @@ const createFilter = (queryString: string) => {
   }
 }
 const loginAction = () => {
-  console.log(isLogin)
   // 调取 登陆组件
+  $store.dispatch('SET_OPENBOX', true)
 }
 const handleSelect = (item) => {
   console.log(item)
 }
 
 </script>
+
 <style scoped lang="less">
 @import "./index.less";
 </style>

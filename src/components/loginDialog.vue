@@ -1,7 +1,12 @@
 <template>
   <!-- 登陆组件 -->
-  <div id="loginDialog">
-    <el-dialog title="登陆">
+  <!-- <teleport to='loginDialog' > -->
+    <div class="box">
+    <el-dialog
+    title="登陆"
+    class="loginbox"
+    v-model="dialogVisible"
+    >
       <el-form ref="form" :model="formData">
         <el-form-item label="Activity name">
           <el-input v-model="formData.myphone"></el-input>
@@ -11,17 +16,23 @@
         </el-form-item>
       </el-form>
       <el-button class="action" @click="login">确定</el-button>
-      <el-button class="cancel">取消</el-button>
+      <el-button class="cancel" @click="cancal">取消</el-button>
       <span>Count: {{ count }}</span>
     </el-dialog>
-  </div>
+    </div>
+    <!-- </teleport> -->
 </template>
 
 <script lang='ts' setup>
-import { ref, toRefs, onBeforeMount, onMounted } from 'vue'
+import { ref, toRefs, onBeforeMount, watch, computed } from 'vue'
 import $store from '@/store'
 import { ElMessage } from 'element-plus'
-
+const dialogVisible = computed(() => $store.state.openBox)
+watch(
+  () => dialogVisible.value,
+  (newVal, oldVal) => {
+  }
+)
 interface loginInfo {
   myphone: string,
   passWord: string
@@ -31,9 +42,13 @@ const formData = ref<loginInfo>({
   passWord: ''
 })
 const count = ref(0)
+const cancal = () => {
+  // 设置 值取消
+  $store.dispatch('SET_OPENBOX', false)
+}
 const verify = (data: loginInfo): boolean => {
   if (data.myphone === '') {
-    ElMessage.error('手机号不能为空')
+    ElMessage.error('手机不能为空')
     return false
   }
   if (data.passWord === '') {
@@ -43,9 +58,7 @@ const verify = (data: loginInfo): boolean => {
   return true
 }
 const login = (data: loginInfo): void => {
-  let dataLength = null
-  if (data) {
-    dataLength = Object.keys(data).length
+  if (verify(data)) {
   } else {
   }
 }
