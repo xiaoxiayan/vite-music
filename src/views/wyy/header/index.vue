@@ -39,12 +39,11 @@ import axios from '@/server/axios'
 
 import testJson from './navList.json'
 import $store from '@/store'
-const isLogin = computed(() => $store.state.userInfo)
+const isLogin = computed(() => $store.state.isLogin)
 const userInfo = computed(() => $store.state.userInfo)
 const emits = defineEmits(['tagclick'])
 const navList = testJson.navList
 const active = ref(0)
-console.log(isLogin, '===', userInfo)
 function navAction (index: any) {
   active.value = index
   // 需要emit 出去一个 router
@@ -77,6 +76,7 @@ const createFilter = (queryString: string) => {
 }
 const loginAction = () => {
   console.log(isLogin)
+  // 调取 登陆组件
 }
 const handleSelect = (item) => {
   console.log(item)

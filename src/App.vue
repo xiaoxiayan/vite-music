@@ -6,7 +6,9 @@
 
   <div id="loginDialog"></div>
 </template>
+<script lang="ts" setup>
 
+</script>
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

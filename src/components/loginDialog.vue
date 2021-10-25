@@ -10,9 +10,8 @@
           <el-input v-model="formData.myphone"></el-input>
         </el-form-item>
       </el-form>
-      <el-button class="action" @click="count++">确定</el-button>
+      <el-button class="action" @click="login">确定</el-button>
       <el-button class="cancel">取消</el-button>
-      <span>Count: {{ count }} </span>
    </el-dialog>
   </div>
 </template>
@@ -30,7 +29,7 @@ const formData = ref<loginInfo>({
   passWord: ''
 })
 const count = ref(0)
-const testFn = (data:loginInfo):boolean => {
+const logingiot = (data:loginInfo):boolean => {
   let dataLength = null
   if (data) {
     dataLength = Object.keys(data).length
