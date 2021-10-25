@@ -24,10 +24,15 @@
 </template>
 
 <script lang='ts' setup>
-import { ref, toRefs, onBeforeMount, watch, computed } from 'vue'
+import { ref, toRefs, onBeforeMount, watch, computed, defineProps } from 'vue'
 import $store from '@/store'
 import { ElMessage } from 'element-plus'
 const dialogVisible = computed(() => $store.state.openBox)
+const props = defineProps({
+  truthy: Boolean,
+  object: Object,
+  string: String
+})
 watch(
   () => dialogVisible.value,
   (newVal, oldVal) => {

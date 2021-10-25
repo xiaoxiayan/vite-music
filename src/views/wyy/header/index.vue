@@ -31,16 +31,18 @@
         </div>
       </div>
     </div>
-    <loginDialog class="logindDialogbox"></loginDialog>
+    <loginDialog class="logindDialogbox" truthy :object="{}" string="string"></loginDialog>
   </div>
 </template>
 
 <script lang='ts' setup>
 import loginDialog from '@/components/loginDialog.vue'
-import { ref, defineEmits, computed } from 'vue'
+import { ref, defineEmits, computed, defineProps } from 'vue'
 import testJson from './navList.json'
 import $store from '@/store'
-
+const props = defineProps({
+  message: String
+})
 const isLogin = computed(() => $store.state.isLogin)
 const userInfo = computed(() => $store.state.userInfo)
 const openBox = computed(() => $store.state.openBox)
