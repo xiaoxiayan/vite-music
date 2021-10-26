@@ -49,23 +49,10 @@ export interface apiKeyDataType {
         code: number,
         banners: []
     },
-<<<<<<< HEAD
-   'artistList': {
-       code:number;
-       data: {
-        artists:[]
-       }
-   },
-   'bannerList': {
-       code:number,
-       banners:[]
-   },
-=======
     'loginMusic': {
         code: number,
         data: any
     }
->>>>>>> 35f0fdf236de169a94ad32ccdfe29ce8bd8d7452
 
 }
 

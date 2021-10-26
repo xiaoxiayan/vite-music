@@ -7,7 +7,8 @@ export default createStore({
     // 登陆信息
     userInfo: {
       avatarUrl: ''
-    }
+    },
+    openBox: false
   },
   // 修改变量（state不能直接赋值修改，只能通过mutations）
   mutations: {
@@ -16,6 +17,9 @@ export default createStore({
     },
     GET_USERINFO (state, newValue) {
       state = newValue
+    },
+    GET_OPENBOX (state, newValue) {
+      state.openBox = newValue
     }
   },
   // mutations的值由actions传入
@@ -25,6 +29,9 @@ export default createStore({
     },
     SET_USERINFO (context, newValue) {
       context.commit('GET_USERINFO', newValue)
+    },
+    SET_OPENBOX (context, newValue) {
+      context.commit('GET_OPENBOX', newValue)
     }
   },
   modules: {

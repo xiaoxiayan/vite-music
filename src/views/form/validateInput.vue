@@ -17,6 +17,7 @@
 import { defineComponent, reactive, PropType, ref, onMounted } from 'vue'
 import { emitter } from './validateForm.vue'
 console.log(emitter, '==emitter')
+// eslint-disable-next-line no-useless-escape
 const emailReg = /^([\w\.\-]+)\@(\w+)(\.([\w^\_]+)){1,2}$/
 interface RuleProp {
     type: 'required' | 'email' | 'password';

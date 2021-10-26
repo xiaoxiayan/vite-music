@@ -24,23 +24,30 @@
       <div class="user">
         <!-- 用户头像,如果有登陆就使用头像，如果没有就使用 文字 -->
         <div v-if="isLogin">
-          <img :src="userInfo.avatarUrl" alt />
+          <img :src="userInfo.avatarUrl"
+               alt='头像'
+           />
         </div>
         <div v-else>
           <span class="loginBtn" @click="loginAction">登陆</span>
         </div>
       </div>
     </div>
+    <loginDialog class="logindDialogbox"></loginDialog>
   </div>
 </template>
+
 <script lang='ts' setup>
+import loginDialog from '@/components/loginDialog.vue'
 import { ref, defineEmits, computed } from 'vue'
 import axios from '@/server/axios'
 
 import testJson from './navList.json'
 import $store from '@/store'
+
 const isLogin = computed(() => $store.state.isLogin)
 const userInfo = computed(() => $store.state.userInfo)
+const openBox = computed(() => $store.state.openBox)
 const emits = defineEmits(['tagclick'])
 const navList = testJson.navList
 const active = ref(0)
@@ -75,10 +82,10 @@ const createFilter = (queryString: string) => {
   }
 }
 const loginAction = () => {
-  console.log(isLogin)
   // 调取 登陆组件
+  $store.dispatch('SET_OPENBOX', true)
 }
-const handleSelect = (item) => {
+const handleSelect = (item:any) => {
   console.log(item)
 }
 
@@ -87,6 +94,7 @@ const handleSelect = (item) => {
 // console.log(menusList,'2222');
 
 </script>
+
 <style scoped lang="less">
 @import "./index.less";
 </style>

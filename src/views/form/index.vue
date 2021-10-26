@@ -60,7 +60,8 @@ export default {
     const emailPassword = ref('')
     const toData = toRefs(formData)
     // const emailReg = /^([\w\.\-]+)\@(\w+)(\.([\w^\_]+)){1,2}$/
-    const onFormSubmit = (val: boolean) => {
+    const onFormSubmit = (val: boolean):void => {
+      console.log(val)
     }
     return {
       formData,
