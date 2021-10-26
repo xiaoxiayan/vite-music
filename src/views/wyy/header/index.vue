@@ -1,6 +1,11 @@
 <template>
   <div class="myheader">
     <!-- 4个模块。logo,ul,搜索，头像 -->
+    <div v-show="false">
+      <span>
+        aaaa
+      </span>
+    </div>
     <div class="warp-header">
       <h1 class="logo" @click="logoClick" />
       <ul class="navList">
@@ -23,28 +28,28 @@
       </div>
       <div class="user">
         <!-- 用户头像,如果有登陆就使用头像，如果没有就使用 文字 -->
-        <div v-if="isLogin">
+        <div v-if="isLogin" class="userAvatar">
           <img :src="userInfo.avatarUrl"
                alt='头像'
            />
         </div>
         <div v-else>
-          <span class="loginBtn" @click="loginAction">登陆</span>
+          <el-button type="primary" class="loginBtn" @click="loginAction">登陆</el-button>
         </div>
       </div>
     </div>
-    <loginDialog class="logindDialogbox"></loginDialog>
+    <loginDialog class="logindDialogbox" truthy :object="{}" string="string"></loginDialog>
   </div>
 </template>
 
 <script lang='ts' setup>
 import loginDialog from '@/components/loginDialog.vue'
-import { ref, defineEmits, computed } from 'vue'
-import axios from '@/server/axios'
-
+import { ref, defineEmits, computed, defineProps } from 'vue'
 import testJson from './navList.json'
 import $store from '@/store'
-
+const props = defineProps({
+  message: String
+})
 const isLogin = computed(() => $store.state.isLogin)
 const userInfo = computed(() => $store.state.userInfo)
 const openBox = computed(() => $store.state.openBox)

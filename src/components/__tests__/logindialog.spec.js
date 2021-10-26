@@ -11,7 +11,6 @@ describe('测试输入是否正确', () => {
       password: '1234'
     }
     const wrapper = mount(logDialog)
-    console.log(wrapper.vm.verify(loginInfo))
     // when ， 当 islogin 为 true  组件显示。 验证，phone，password正确性，  为空的时候不去提交
     // then
     expect(wrapper.vm.verify(loginInfo)).toBe(true)
@@ -23,7 +22,6 @@ describe('测试提交内容', () => {
     const phone = '18976203568'
     const password = '1234'
     await wrapper.find('.loginbox .action').trigger('click')
-    console.log(wrapper.find('span').text())
     // expect(wrapper.find('span').text()).toBe('Count: 1')
   })
 })
