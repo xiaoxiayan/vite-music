@@ -31,12 +31,11 @@ const props = defineProps({
   object: Object,
   string: String
 })
-watch(
-  () => dialogVisible.value,
-  (newVal, oldVal) => {
-    console.log(newVal, 'wath', oldVal)
-  }
-)
+// watch(
+//   () => dialogVisible.value,
+//   (newVal, oldVal) => {
+//   }
+// )
 interface loginInfo {
   myphone: string,
   passWord: string

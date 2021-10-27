@@ -99,5 +99,14 @@ describe('header 组件', () => {
   })
 })
 test('测试 navlist', () => {
+  const wrapper = mount(myheader, {
+    global: {
+      plugins: [ElementPlus]
+    }
+  })
+  // element组件还是要findComponentw
+  const search = wrapper.getComponent('.searchInput')
+  // await search.setValue('aaaaaa')
+  console.log(search.vm.modelValue)
   expect(true).toBe(true)
 })
