@@ -39,11 +39,13 @@
       </div>
     </div>
     <loginDialog class="logindDialogbox" truthy :object="{}" string="string"></loginDialog>
-  </div>
+    <testBox></testBox>
+ </div>
 </template>
 
 <script lang='ts' setup>
 import loginDialog from '@/components/loginDialog.vue'
+import testBox from '@/components/test-element.vue'
 import { ref, defineEmits, computed, defineProps } from 'vue'
 import testJson from './navList.json'
 import $store from '@/store'
@@ -79,7 +81,7 @@ const querySearchAsync = (queryString: string, cb: (arg: any) => void) => {
   }, 3000 * Math.random())
 }
 const createFilter = (queryString: string) => {
-  return (restaurant) => {
+  return (restaurant:any) => {
     return (
       restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) ===
       0
@@ -88,6 +90,7 @@ const createFilter = (queryString: string) => {
 }
 const loginAction = () => {
   // 调取 登陆组件
+  console.log('loginBtnAction------------')
   $store.dispatch('SET_OPENBOX', true)
 }
 const handleSelect = (item:any) => {

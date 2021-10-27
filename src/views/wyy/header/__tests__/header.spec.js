@@ -1,7 +1,9 @@
 import myheader from '../index.vue'
 import logDialog from '@/components/loginDialog'
+import testBox from '@/components/test-element'
 import { mount, shallowMount } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
+import store from '@/store'
 // describe('测试登陆按钮打开dialog', () => {
 //   const mockComponent = {
 //     template: '<div><slot></slot></div>'
@@ -56,7 +58,14 @@ import ElementPlus from 'element-plus'
 // })
 //
 describe('header 组件', () => {
-  const wrapper = mount(myheader)
+  const wrapper = mount(myheader, {
+    global: {
+      plugins: [ElementPlus],
+      provide: {
+        store
+      }
+    }
+  })
   const showElement = {
     template: ''
   }
@@ -76,13 +85,17 @@ describe('header 组件', () => {
     expect(navList.at(0).text()).toBe('发现音乐')
   })
   test('验证 dialog在点击前是否可见', async () => {
-    const wrapper = mount(myheader, {
-      global: {
-        components: [globalComponents, showElement]
-      }
+    const wrapperBox = shallowMount(myheader, {
+      plugins: [ElementPlus]
     })
-    // await wrapper.find('.loginBtn').trigger('click')
-    console.log(wrapper.html())
-    expect(wrapper.find('.logindDialogbox').isVisible()).toBe(true)
+    const testwrapper = wrapperBox.findComponent(testBox)
+    const loginWrapper = wrapperBox.findComponent(logDialog)
+    await wrapper.find('.loginBtn').trigger('click')
+    expect(store.state.openBox).toBe(true)
+    // await loginWrapper.find('.cancel').trigger('click')
+    // console.log(dialogBox.vm.testFn('aaaaaaaaaa'), '===', store.state.openBox)
+    console.log(testwrapper.vm, '===', loginWrapper.vm.$store)
+
+    // expect(wrapper.find('.logindDialogbox').isVisible()).toBe(true)
   })
 })
