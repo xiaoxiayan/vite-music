@@ -41,13 +41,12 @@
         </div>
       </div>
     </div>
-    <loginDialog class="logindDialogbox" truthy :object="{}" string="string"></loginDialog>
+    <loginDialog></loginDialog>
     <testBox></testBox>
  </div>
 </template>
 
 <script lang='ts' setup>
-import loginDialog from '@/components/loginDialog.vue'
 import testBox from '@/components/test-element.vue'
 import { ref, defineEmits, computed, defineProps } from 'vue'
 import testJson from './navList.json'
@@ -105,7 +104,16 @@ const handleSelect = (item:any) => {
 // console.log(menusList,'2222');
 
 </script>
+<script lang="ts">
+import loginDialog from '@/components/loginDialog.vue'
+import { defineComponent } from 'vue'
 
+export default defineComponent({
+  components:{
+    loginDialog
+  }
+})
+</script>
 <style scoped lang="less">
 @import "./index.less";
 </style>

@@ -3,15 +3,14 @@
   <!-- <teleport to='loginDialog' > -->
     <el-dialog
     title="登陆"
-    class="loginbox"
     v-model="dialogVisible"
     >
       <el-form ref="form" :model="formData">
         <el-form-item label="Activity name">
           <el-input v-model="formData.myphone"></el-input>
         </el-form-item>
-        <el-form-item label="Activity name">
-          <el-input v-model="formData.myphone"></el-input>
+        <el-form-item label="Activity passWord">
+          <el-input v-model="formData.passWord"></el-input>
         </el-form-item>
       </el-form>
       <el-button class="action" @click="login">确定</el-button>

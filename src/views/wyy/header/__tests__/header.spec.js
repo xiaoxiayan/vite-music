@@ -66,20 +66,20 @@ describe('header 组件', () => {
       }
     }
   })
-  const showElement = {
-    template: ''
-  }
-  const mockComponent = {
-    template: '<div><slot></slot></div>'
-  }
-  const globalComponents = {
-    'el-autocomplete': mockComponent,
-    'el-dialog': mockComponent,
-    'el-button': mockComponent,
-    'el-form': mockComponent,
-    'el-form-item': mockComponent,
-    'el-input': mockComponent
-  }
+  // const showElement = {
+  //   template: ''
+  // }
+  // const mockComponent = {
+  //   template: '<div><slot></slot></div>'
+  // }
+  // const globalComponents = {
+  //   'el-autocomplete': mockComponent,
+  //   'el-dialog': mockComponent,
+  //   'el-button': mockComponent,
+  //   'el-form': mockComponent,
+  //   'el-form-item': mockComponent,
+  //   'el-input': mockComponent
+  // }
   test('list列表的内容', async () => {
     const navList = wrapper.findAll('.nav')
     expect(navList.at(0).text()).toBe('发现音乐')
