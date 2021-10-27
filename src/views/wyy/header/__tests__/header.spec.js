@@ -1,8 +1,11 @@
+import ElementPlus from 'element-plus'
 import myheader from '../index.vue'
 import logDialog from '@/components/loginDialog'
 import testBox from '@/components/test-element'
-import { mount, shallowMount } from '@vue/test-utils'
-import ElementPlus from 'element-plus'
+import {
+  mount,
+  shallowMount
+} from '@vue/test-utils'
 import store from '@/store'
 // describe('测试登陆按钮打开dialog', () => {
 //   const mockComponent = {
@@ -58,14 +61,14 @@ import store from '@/store'
 // })
 //
 describe('header 组件', () => {
-  const wrapper = mount(myheader, {
-    global: {
-      plugins: [ElementPlus],
-      provide: {
-        store
-      }
-    }
-  })
+  // const wrapper = mount(myheader, {
+  //   global: {
+  //     plugins: ElementPlus,
+  //     provide: {
+  //       store
+  //     }
+  //   }
+  // })
   // const showElement = {
   //   template: ''
   // }
@@ -80,33 +83,36 @@ describe('header 组件', () => {
   //   'el-form-item': mockComponent,
   //   'el-input': mockComponent
   // }
-  test('list列表的内容', async () => {
-    const navList = wrapper.findAll('.nav')
-    expect(navList.at(0).text()).toBe('发现音乐')
-  })
+  // test('list列表的内容', async () => {
+  //   const navList = wrapper.findAll('.nav')
+  //   expect(navList.at(0).text()).toBe('发现音乐')
+  // })
+
   test('验证 dialog在点击前是否可见', async () => {
-    const wrapperBox = mount(myheader, {
-      plugins: [ElementPlus]
+    const wrapper = mount(myheader, {
+      global:{
+        plugins: [ElementPlus]
+      }
     })
     // const testwrapper = wrapperBox.find(testBox)
-    const loginWrapper = wrapperBox.findComponent(logDialog)
+    // const loginWrapper = wrapper.findComponent(logDialog)
     await wrapper.find('.loginBtn').trigger('click')
     expect(store.state.openBox).toBe(true)
     // 当取消按钮点击。store.state.openBox 应该为 false
-    await loginWrapper.find('.cancel').trigger('click')
+    // await loginWrapper.find('.cancel').trigger('click')
     // console.log(dialogBox.vm.testFn('aaaaaaaaaa'), '===', store.state.openBox)
-    expect(store.state.openBox).toBe(false)
+    // expect(store.state.openBox).toBe(false)
   })
-})
-test('测试 navlist', async () => {
-  const wrapper = mount(myheader, {
-    global: {
-      plugins: [ElementPlus]
-    }
+  test('测试 navlist', async () => {
+    const wrapper = mount(myheader, {
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+    // element组件还是要findComponent
+    await wrapper.find('[test-data="searchInput"]').setValue('aaaaaa')
+    // await search.setValue('aaaaaa')
+    console.log(wrapper.vm.searchVal /*  */ , '-+---value')
+    expect(wrapper.find('.searchSpan').text()).toBe('aaaaaa')
   })
-  // element组件还是要findComponent
-  await wrapper.find('[test-data="searchInput"]').setValue('aaaaaa')
-  // await search.setValue('aaaaaa')
-  console.log(wrapper.vm.searchVal/*  */, '-+---value')
-  expect(wrapper.find('.searchSpan').text()).toBe('aaaaaa')
 })
