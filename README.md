@@ -47,7 +47,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   返回 vueWrapper,但是只能使用  findComponet(FOO) || findComponet( { name: Foo } ) 格式寻找.
   返回的 vueWrapper 无法去 find 上面的dom.
   mount&&shallowMount-findComponet( { name: Foo } ) 格式 无法读取porps。
-  mount&&shallowMount-findComponet(FOO) 格式 可以读取porps。无法读取 data 。
+  mount&&shallowMount-findComponet(FOO) 格式 可以读取porps。可以find dom.  无法读取 data 。
   ```
   ### vm
   ```

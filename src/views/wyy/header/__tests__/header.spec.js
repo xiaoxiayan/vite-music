@@ -85,17 +85,19 @@ describe('header 组件', () => {
     expect(navList.at(0).text()).toBe('发现音乐')
   })
   test('验证 dialog在点击前是否可见', async () => {
-    const wrapperBox = shallowMount(myheader, {
+    const wrapperBox = mount(myheader, {
       plugins: [ElementPlus]
     })
-    const testwrapper = wrapperBox.findComponent(testBox)
+    // const testwrapper = wrapperBox.find(testBox)
     const loginWrapper = wrapperBox.findComponent(logDialog)
     await wrapper.find('.loginBtn').trigger('click')
     expect(store.state.openBox).toBe(true)
-    // await loginWrapper.find('.cancel').trigger('click')
+    // 当取消按钮点击。store.state.openBox 应该为 false
+    await loginWrapper.find('.cancel').trigger('click')
     // console.log(dialogBox.vm.testFn('aaaaaaaaaa'), '===', store.state.openBox)
-    console.log(testwrapper.vm, '===', loginWrapper.vm.$store)
-
-    // expect(wrapper.find('.logindDialogbox').isVisible()).toBe(true)
+    expect(store.state.openBox).toBe(false)
   })
+})
+test('测试 navlist', () => {
+  expect(true).toBe(true)
 })
