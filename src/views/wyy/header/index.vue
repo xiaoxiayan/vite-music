@@ -19,13 +19,15 @@
       </ul>
       <!-- 搜索 -->
       <div class="search">
-        <!-- <el-autocomplete
+        <el-autocomplete
+          test-data="searchInput"
           v-model="searchVal"
           :fetch-suggestions="querySearchAsync"
           placeholder="Please input"
           @select="handleSelect"
-        /> -->
-        <el-input class="searchInput" v-model="searchVal"></el-input>
+        />
+        <!-- <el-input class="searchInput"  v-model="searchVal"></el-input> -->
+        <span class="searchSpan">{{ searchVal }}</span>
       </div>
       <div class="user">
         <!-- 用户头像,如果有登陆就使用头像，如果没有就使用 文字 -->

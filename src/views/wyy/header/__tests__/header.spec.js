@@ -98,15 +98,15 @@ describe('header 组件', () => {
     expect(store.state.openBox).toBe(false)
   })
 })
-test('测试 navlist', () => {
+test('测试 navlist', async () => {
   const wrapper = mount(myheader, {
     global: {
       plugins: [ElementPlus]
     }
   })
-  // element组件还是要findComponentw
-  const search = wrapper.getComponent('.searchInput')
+  // element组件还是要findComponent
+  await wrapper.find('[test-data="searchInput"]').setValue('aaaaaa')
   // await search.setValue('aaaaaa')
-  console.log(search.vm.modelValue)
-  expect(true).toBe(true)
+  console.log(wrapper.vm.searchVal/*  */, '-+---value')
+  expect(wrapper.find('.searchSpan').text()).toBe('aaaaaa')
 })
