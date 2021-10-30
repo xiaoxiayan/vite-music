@@ -114,18 +114,19 @@ describe('header 组件', () => {
   //   // console.log(dialogBox.vm.testFn('aaaaaaaaaa'), '===', store.state.openBox)
   //   // expect(store.state.openBox).toBe(false)
   // })
-  // test('测试 navlist', async () => {
-  //   const wrapper = mount(myheader, {
-  //     global: {
-  //       plugins: [ElementPlus]
-  //     }
-  //   })
-  //   // element组件还是要findComponent
-  //   await wrapper.find('[test-data="searchInput"]').setValue('aaaaaa')
-  //   // await search.setValue('aaaaaa')
-  //   // console.log(wrapper.vm.searchVal /*  */, '-+---value')
-  //   expect(wrapper.find('.searchSpan').text()).toBe('aaaaaa')
-  // })
+  test('测试 navlist', async () => {
+    const wrapper = mount(myheader, {
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+    // element组件还是要findComponent
+    await wrapper.find('[test-data="searchInput"]').setValue('aaaaaa')
+    // console.log('-====', wrapper.find('[test-data="searchInput"]'))
+    // await search.setValue('aaaaaa')
+    // console.log(wrapper.vm.searchVal /*  */, '-+---value')
+    expect(wrapper.find('.searchSpan').text()).toBe('aaaaaa')
+  })
   test('集成测试点击dialog。 setValue, 登陆', async () => {
     const wrapper = mount(myheader, {
       global: {
@@ -137,9 +138,9 @@ describe('header 组件', () => {
     expect(store.state.openBox).toBe(true)
     const dialogWrapper = wrapper.findComponent(logDialog)
     expect(dialogWrapper.find('.action').isVisible()).toBe(true)
-    const inputList = dialogWrapper.findAll('.formInput')
-    await inputList.at(0).setValue('18976203568')
-    await inputList.at(1).setValue('a690150')
-    console.log(dialogWrapper.$data, '----inputlist')
+    const inputList = dialogWrapper.findAllComponents('.formInput')
+    await inputList[0].setValue('18976203568')
+    await inputList[1].setValue('a690150')
+    console.log(dialogWrapper)
   })
 })
