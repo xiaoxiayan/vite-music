@@ -1,21 +1,16 @@
 <template>
   <div class="myheader">
     <!-- 4个模块。logo,ul,搜索，头像 -->
-    <div v-show="false">
-      <span>
-        aaaa
-      </span>
-    </div>
     <div class="warp-header">
       <h1 class="logo" @click="logoClick" />
       <ul class="navList">
-        <li
+        <!-- <li
           v-for="item,index in navList"
           :key="index"
           class="nav"
           :class="active == index ? 'active' : ''"
           @click="navAction(index)"
-        >{{ item.name }}</li>
+        >{{ item.name }}</li> -->
       </ul>
       <!-- 搜索 -->
       <div class="search">
@@ -42,12 +37,11 @@
       </div>
     </div>
     <loginDialog></loginDialog>
-    <testBox></testBox>
  </div>
 </template>
 
 <script lang='ts' setup>
-import testBox from '@/components/test-element.vue'
+import loginDialog from '@/components/loginDialog.vue'
 import { ref, defineEmits, computed, defineProps } from 'vue'
 import testJson from './navList.json'
 import $store from '@/store'
@@ -92,7 +86,7 @@ const createFilter = (queryString: string) => {
 }
 const loginAction = () => {
   // 调取 登陆组件
-  console.log('loginBtnAction------------')
+  // console.log('loginBtnAction------------')
   $store.dispatch('SET_OPENBOX', true)
 }
 const handleSelect = (item:any) => {
@@ -104,16 +98,7 @@ const handleSelect = (item:any) => {
 // console.log(menusList,'2222');
 
 </script>
-<script lang="ts">
-import loginDialog from '@/components/loginDialog.vue'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  components:{
-    loginDialog
-  }
-})
-</script>
 <style scoped lang="less">
 @import "./index.less";
 </style>
