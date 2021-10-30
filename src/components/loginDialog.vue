@@ -61,6 +61,7 @@ const verify = (data: loginInfo): boolean => {
 }
 const login = (data: loginInfo): boolean => {
   if (verify(data)) {
+    $store.dispatch('SET_ISLOGIN', true)
     return true
   } else {
     return false

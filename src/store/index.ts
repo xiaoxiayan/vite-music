@@ -13,10 +13,10 @@ export default createStore({
   // 修改变量（state不能直接赋值修改，只能通过mutations）
   mutations: {
     GET_ISLOGIN (state, newValue) {
-      state = newValue
+      state.isLogin = newValue
     },
     GET_USERINFO (state, newValue) {
-      state = newValue
+      state.userInfo = newValue
     },
     GET_OPENBOX (state, newValue) {
       state.openBox = newValue

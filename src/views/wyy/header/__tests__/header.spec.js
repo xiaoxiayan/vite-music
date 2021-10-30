@@ -12,7 +12,7 @@ import store from '@/store'
 jest.mock('@/server/test_getData.js', () => (
   {
     __esModule: true,
-    loginData: jest.fn(() => ({
+    loginData: jest.fn((data) => ({
       userName: 'xxp',
       avatarUrl: 'xxp.com'
     }))
@@ -141,6 +141,12 @@ describe('header 组件', () => {
     const inputList = dialogWrapper.findAllComponents('.formInput')
     await inputList[0].setValue('18976203568')
     await inputList[1].setValue('a690150')
-    console.log(dialogWrapper)
+    const formData = dialogWrapper.findComponent({ name: 'el-form' }).vm.model
+    console.log(formData, 'data')
+    expect(formData).toEqual({ myphone: '18976203568', passWord: 'a690150' })
+    await dialogWrapper.find('.action').trigger('click')
+    const res = await loginData(formData)
+    expect(res).toEqual({ userName: 'xxp', avatarUrl: 'xxp.com' })
+    expect(wrapper.find('.userAvatar').exists()).toBe(true)
   })
 })
