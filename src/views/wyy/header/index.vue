@@ -4,13 +4,13 @@
     <div class="warp-header">
       <h1 class="logo" @click="logoClick" />
       <ul class="navList">
-        <!-- <li
+        <li
           v-for="item,index in navList"
           :key="index"
           class="nav"
           :class="active == index ? 'active' : ''"
           @click="navAction(index)"
-        >{{ item.name }}</li> -->
+        >{{ item.name }}</li>
       </ul>
       <!-- 搜索 -->
       <div class="search">

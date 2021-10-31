@@ -138,11 +138,10 @@ describe('header 组件', () => {
     expect(store.state.openBox).toBe(true)
     const dialogWrapper = wrapper.findComponent(logDialog)
     expect(dialogWrapper.find('.action').isVisible()).toBe(true)
-    const inputList = dialogWrapper.findAllComponents('.formInput')
-    await inputList[0].setValue('18976203568')
+    const inputList = dialogWrapper.findAllComponents({ name: 'el-input' })
+    await inputList.at(0).setValue('18976203568')
     await inputList[1].setValue('a690150')
     const formData = dialogWrapper.findComponent({ name: 'el-form' }).vm.model
-    console.log(formData, 'data')
     expect(formData).toEqual({ myphone: '18976203568', passWord: 'a690150' })
     await dialogWrapper.find('.action').trigger('click')
     const res = await loginData(formData)
