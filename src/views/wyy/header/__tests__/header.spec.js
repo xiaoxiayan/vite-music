@@ -90,7 +90,7 @@ describe('header 组件', () => {
 
   test('验证 dialog在点击前是否可见', async () => {
     const wrapper = mount(myheader, {
-      global:{
+      global: {
         plugins: [ElementPlus]
       }
     })
@@ -112,7 +112,10 @@ describe('header 组件', () => {
     // element组件还是要findComponent
     await wrapper.find('[test-data="searchInput"]').setValue('aaaaaa')
     // await search.setValue('aaaaaa')
-    console.log(wrapper.vm.searchVal /*  */ , '-+---value')
+    console.log(wrapper.vm.searchVal /*  */, '-+---value')
     expect(wrapper.find('.searchSpan').text()).toBe('aaaaaa')
+  })
+  test('测试登陆流程', () => {
+    expect(true).toBe(true)
   })
 })

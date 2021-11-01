@@ -9,7 +9,7 @@ const apiList = {
   // banner
   bannerList: '/aaa/banner',
   // 登陆
-  loginMusic: '/aaa//login/cellphone'
+  loginMusic: '/aaa/login/cellphone'
 }
 
 // typeof 获取 apiList 的变量类型， 然后 keyof 在获取 这个变量的 key值
@@ -51,7 +51,7 @@ export interface apiKeyDataType {
     },
     'loginMusic': {
         code: number,
-        data: any
+        profile: any
     }
 
 }

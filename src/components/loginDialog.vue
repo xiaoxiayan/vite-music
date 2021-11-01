@@ -6,14 +6,14 @@
     v-model="dialogVisible"
     >
       <el-form ref="form" :model="formData">
-        <el-form-item label="Activity name">
-          <el-input v-model="formData.myphone"></el-input>
+        <el-form-item label="手机号：">
+          <el-input v-model="formData.phone"></el-input>
         </el-form-item>
-        <el-form-item label="Activity passWord">
-          <el-input v-model="formData.passWord"></el-input>
+        <el-form-item label="密码：">
+          <el-input v-model="formData.password"></el-input>
         </el-form-item>
       </el-form>
-      <el-button class="action" @click="login">确定</el-button>
+      <el-button class="action" @click="login(formData)">确定</el-button>
       <el-button class="cancel" @click="cancal">取消</el-button>
       <span>Count: {{ count }}</span>
     </el-dialog>
@@ -23,6 +23,7 @@
 <script lang='ts' setup>
 import { ref, toRefs, onBeforeMount, watch, computed, defineProps } from 'vue'
 import $store from '@/store'
+import axios from '@/server/axios'
 import { ElMessage } from 'element-plus'
 const dialogVisible = computed(() => $store.state.openBox)
 const props = defineProps({
@@ -36,12 +37,12 @@ const props = defineProps({
 //   }
 // )
 interface loginInfo {
-  myphone: string,
-  passWord: string
+  phone: string,
+  password: string
 }
 const formData = ref<loginInfo>({
-  myphone: '',
-  passWord: ''
+  phone: '',
+  password: ''
 })
 const count = ref(0)
 const cancal = () => {
@@ -49,11 +50,11 @@ const cancal = () => {
   $store.dispatch('SET_OPENBOX', false)
 }
 const verify = (data: loginInfo): boolean => {
-  if (data.myphone === '') {
+  if (data.phone === '') {
     ElMessage.error('手机不能为空')
     return false
   }
-  if (data.passWord === '') {
+  if (data.password === '') {
     ElMessage.error('密码不能为空')
     return false
   }
@@ -61,6 +62,18 @@ const verify = (data: loginInfo): boolean => {
 }
 const login = (data: loginInfo): boolean => {
   if (verify(data)) {
+    axios({
+      url: 'loginMusic',
+      method: 'GET',
+      data: data
+    }).then(res => {
+      console.log(res)
+      if (res.code === 200) {
+        $store.dispatch('SET_ISLOGIN', true)
+        $store.dispatch('SET_USERINFO', res.profile)
+        $store.dispatch('SET_OPENBOX', false)
+      }
+    })
     return true
   } else {
     return false

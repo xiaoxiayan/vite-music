@@ -31,7 +31,7 @@ const http: NewAxiosInstance = axios.create({
 
 // 请求拦截器
 const QS_METHOD: Method[] = ['POST', 'post', 'PUT', 'put']
-const GET_METHOD: Method[] = ['GET', 'get', 'DELETE', 'delete']
+const GET_METHOD: Method[] = ['GET', 'get', 'DELETE', 'delete', 'Get']
 http.interceptors.request.use(response => {
   if (response.method && QS_METHOD.includes(response.method)) { // 这里只处理post请求，根据自己情况修改
     response.data = qs.stringify(response.data)

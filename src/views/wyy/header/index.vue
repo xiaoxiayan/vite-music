@@ -47,8 +47,9 @@
 </template>
 
 <script lang='ts' setup>
+import loginDialog from '@/components/loginDialog.vue'
 import testBox from '@/components/test-element.vue'
-import { ref, defineEmits, computed, defineProps } from 'vue'
+import { ref, defineEmits, computed, defineProps, watch } from 'vue'
 import testJson from './navList.json'
 import $store from '@/store'
 const props = defineProps({
@@ -57,6 +58,12 @@ const props = defineProps({
 const isLogin = computed(() => $store.state.isLogin)
 const userInfo = computed(() => $store.state.userInfo)
 const openBox = computed(() => $store.state.openBox)
+watch(
+  () => userInfo,
+  (newVal) => {
+    console.log(newVal.value, 'userInfoWactch')
+  }
+)
 const emits = defineEmits(['tagclick'])
 const navList = testJson.navList
 const active = ref(0)
@@ -92,7 +99,6 @@ const createFilter = (queryString: string) => {
 }
 const loginAction = () => {
   // 调取 登陆组件
-  console.log('loginBtnAction------------')
   $store.dispatch('SET_OPENBOX', true)
 }
 const handleSelect = (item:any) => {
@@ -104,16 +110,7 @@ const handleSelect = (item:any) => {
 // console.log(menusList,'2222');
 
 </script>
-<script lang="ts">
-import loginDialog from '@/components/loginDialog.vue'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  components:{
-    loginDialog
-  }
-})
-</script>
 <style scoped lang="less">
 @import "./index.less";
 </style>
