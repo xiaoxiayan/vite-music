@@ -7,7 +7,7 @@ const apiList = {
   // 歌手分类列表
   artistList: '/aaa/artist/list',
   // banner
-  bannerList: '/aaa/banner',
+  bannerList: 'http://localhost:3000/banner',
   // 登陆
   loginMusic: '/aaa/login/cellphone'
 }

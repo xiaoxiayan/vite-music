@@ -128,7 +128,7 @@ describe('header 组件', () => {
     // console.log(wrapper.vm.searchVal /*  */, '-+---value')
     expect(wrapper.find('.searchSpan').text()).toBe('aaaaaa')
   })
-  test('集成测试点击dialog。 setValue, 登陆', async (done) => {
+  test('集成测试点击dialog。 setValue, 登陆', async () => {
     const wrapper = mount(myheader, {
       global: {
         plugins: [ElementPlus]
@@ -144,9 +144,8 @@ describe('header 组件', () => {
     await inputList[1].setValue('a690150')
     const formData = dialogWrapper.findComponent({ name: 'el-form' }).vm.model
     expect(formData).toEqual({ phone: '18976203568', password: 'a690150' })
-    await dialogWrapper.find('.action').trigger('click')
+    // await dialogWrapper.find('.action').trigger('click')
     const res = await login(formData)
-    console.log(res, 'jest.fn')
     expect(res).toEqual({ userName: 'xxp', avatarUrl: 'xxp.com' })
     // expect(wrapper.find('.userAvatar').exists()).toBe(true)
     // await wrapper.find('.userAvatar').trigger('click')

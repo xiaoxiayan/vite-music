@@ -42,7 +42,8 @@
 
 <script lang='ts' setup>
 import loginDialog from '@/components/loginDialog.vue'
-import axios from '@/server/axios'
+// import axios from '@/server/axios'
+import axios from 'axios'
 import { ref, defineEmits, computed, defineProps, watch, onMounted } from 'vue'
 import testJson from './navList.json'
 import $store from '@/store'
@@ -100,18 +101,18 @@ const handleSelect = (item:any) => {
   console.log(item)
 }
 onMounted(() => {
-  axios({
-    url: 'loginMusic',
-    method: 'GET',
-    data: { phone: '18976203568', password: 'a690150' }
-  }).then(res => {
-    console.log(res, 'resssssssa')
-    if (res && res.code === 200) {
-      $store.dispatch('SET_ISLOGIN', true)
-      $store.dispatch('SET_USERINFO', res.profile)
-      $store.dispatch('SET_OPENBOX', false)
-    }
-  })
+  // axios({
+  //   url: 'http://localhost:3000/banner',
+  //   method: 'GET',
+  //   data: ''
+  // }).then(res => {
+  //   console.log(res.data, 'ressAAAAsssssa')
+  //   // if (res && res.code === 200) {
+  //   $store.dispatch('SET_ISLOGIN', true)
+  //   //   $store.dispatch('SET_USERINFO', res.profile)
+  //   //   $store.dispatch('SET_OPENBOX', false)
+  //   // }
+  // })
 })
 
 //   pageData.menusList = data
