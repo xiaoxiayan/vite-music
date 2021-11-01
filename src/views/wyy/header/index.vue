@@ -1,11 +1,6 @@
 <template>
   <div class="myheader">
     <!-- 4个模块。logo,ul,搜索，头像 -->
-    <div v-show="false">
-      <span>
-        aaaa
-      </span>
-    </div>
     <div class="warp-header">
       <h1 class="logo" @click="logoClick" />
       <ul class="navList">
@@ -42,13 +37,11 @@
       </div>
     </div>
     <loginDialog></loginDialog>
-    <testBox></testBox>
  </div>
 </template>
 
 <script lang='ts' setup>
 import loginDialog from '@/components/loginDialog.vue'
-import testBox from '@/components/test-element.vue'
 import { ref, defineEmits, computed, defineProps, watch } from 'vue'
 import testJson from './navList.json'
 import $store from '@/store'
@@ -99,6 +92,7 @@ const createFilter = (queryString: string) => {
 }
 const loginAction = () => {
   // 调取 登陆组件
+  // console.log('loginBtnAction------------')
   $store.dispatch('SET_OPENBOX', true)
 }
 const handleSelect = (item:any) => {

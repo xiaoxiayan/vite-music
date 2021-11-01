@@ -15,7 +15,6 @@
       </el-form>
       <el-button class="action" @click="login(formData)">确定</el-button>
       <el-button class="cancel" @click="cancal">取消</el-button>
-      <span>Count: {{ count }}</span>
     </el-dialog>
     <!-- </teleport> -->
 </template>
@@ -60,23 +59,21 @@ const verify = (data: loginInfo): boolean => {
   }
   return true
 }
-const login = (data: loginInfo): boolean => {
+const login = (data: loginInfo):void => {
   if (verify(data)) {
     axios({
       url: 'loginMusic',
       method: 'GET',
       data: data
     }).then(res => {
-      console.log(res)
       if (res.code === 200) {
         $store.dispatch('SET_ISLOGIN', true)
         $store.dispatch('SET_USERINFO', res.profile)
         $store.dispatch('SET_OPENBOX', false)
       }
     })
-    return true
   } else {
-    return false
+    ElMessage.error('请输入正确的手机号码')
   }
 }
 </script>

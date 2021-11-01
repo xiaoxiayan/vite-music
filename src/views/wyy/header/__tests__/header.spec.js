@@ -2,12 +2,24 @@ import ElementPlus from 'element-plus'
 import myheader from '../index.vue'
 import logDialog from '@/components/loginDialog'
 import testBox from '@/components/test-element'
+import { login } from '@/components/js/index.ts'
 import {
   mount,
-  shallowMount
+  shallowMount,
+  flushPromises
 } from '@vue/test-utils'
 import store from '@/store'
-// describe('测试登陆按钮打开dialog', () => {
+
+jest.mock('@/components/js/index.ts', () => (
+  {
+    __esModule: true,
+    login: jest.fn((data) => ({
+      userName: 'xxp',
+      avatarUrl: 'xxp.com'
+    }))
+  }
+))
+// describe('测试登陆按钮打开dialog', () => {F
 //   const mockComponent = {
 //     template: '<div><slot></slot></div>'
 //   }
@@ -88,21 +100,21 @@ describe('header 组件', () => {
   //   expect(navList.at(0).text()).toBe('发现音乐')
   // })
 
-  test('验证 dialog在点击前是否可见', async () => {
-    const wrapper = mount(myheader, {
-      global: {
-        plugins: [ElementPlus]
-      }
-    })
-    // const testwrapper = wrapperBox.find(testBox)
-    // const loginWrapper = wrapper.findComponent(logDialog)
-    await wrapper.find('.loginBtn').trigger('click')
-    expect(store.state.openBox).toBe(true)
-    // 当取消按钮点击。store.state.openBox 应该为 false
-    // await loginWrapper.find('.cancel').trigger('click')
-    // console.log(dialogBox.vm.testFn('aaaaaaaaaa'), '===', store.state.openBox)
-    // expect(store.state.openBox).toBe(false)
-  })
+  // test('验证 dialog在点击前是否可见', async () => {
+  //   const wrapper = mount(myheader, {
+  //     global: {
+  //       plugins: [ElementPlus]
+  //     }
+  //   })
+  //   // const testwrapper = wrapperBox.find(testBox)
+  //   const loginWrapper = wrapper.findComponent({ name: 'el-dialog' })
+  //   await wrapper.find('.loginBtn').trigger('click')
+  //   expect(store.state.openBox).toBe(true)
+  //   // 当取消按钮点击。store.state.openBox 应该为 false
+  //   console.log(loginWrapper)
+  //   // console.log(dialogBox.vm.testFn('aaaaaaaaaa'), '===', store.state.openBox)
+  //   // expect(store.state.openBox).toBe(false)
+  // })
   test('测试 navlist', async () => {
     const wrapper = mount(myheader, {
       global: {
@@ -111,11 +123,35 @@ describe('header 组件', () => {
     })
     // element组件还是要findComponent
     await wrapper.find('[test-data="searchInput"]').setValue('aaaaaa')
+    // console.log('-====', wrapper.find('[test-data="searchInput"]'))
     // await search.setValue('aaaaaa')
-    console.log(wrapper.vm.searchVal /*  */, '-+---value')
+    // console.log(wrapper.vm.searchVal /*  */, '-+---value')
     expect(wrapper.find('.searchSpan').text()).toBe('aaaaaa')
   })
-  test('测试登陆流程', () => {
-    expect(true).toBe(true)
+  test('集成测试点击dialog。 setValue, 登陆', async (done) => {
+    const wrapper = mount(myheader, {
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+    // 首先点击，测试点击的情况
+    await wrapper.find('.loginBtn').trigger('click')
+    expect(store.state.openBox).toBe(true)
+    const dialogWrapper = wrapper.findComponent(logDialog)
+    expect(dialogWrapper.find('.action').isVisible()).toBe(true)
+    const inputList = dialogWrapper.findAllComponents({ name: 'el-input' })
+    await inputList.at(0).setValue('18976203568')
+    await inputList[1].setValue('a690150')
+    const formData = dialogWrapper.findComponent({ name: 'el-form' }).vm.model
+    expect(formData).toEqual({ phone: '18976203568', password: 'a690150' })
+    await dialogWrapper.find('.action').trigger('click')
+    await flushPromises()
+    const res = await login(formData)
+    expect(res).toEqual({ userName: 'xxp', avatarUrl: 'xxp.com' })
+    console.log(wrapper.vm.isLogin, 'haveLogin')
+    expect(wrapper.find('.userAvatar').exists()).toBe(true)
+    await wrapper.find('.userAvatar').trigger('click')
+    // 点击头像，弹窗个人列表
+    expect(wrapper.find('.userInfoList').isVisible()).toBe(true)
   })
 })
