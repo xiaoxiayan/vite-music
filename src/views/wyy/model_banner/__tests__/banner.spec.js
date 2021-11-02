@@ -9,9 +9,12 @@ test('测试', (done) => {
       plugins: [ElementPuls]
     }
   })
-  console.log(wrapper)
   wrapper.vm.$nextTick(() => {
-    console.log(wrapper.vm.bannerList)
-    done()
+    wrapper.vm.$nextTick(() => {
+      const bannerList = wrapper.findAllComponents({ name: 'el-carousel-item' })
+      console.log(bannerList.length)
+      expect(bannerList.length).toBe(6)
+      done()
+    })
   })
 })

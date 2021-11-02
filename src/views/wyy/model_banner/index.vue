@@ -1,14 +1,20 @@
 <template>
   <el-carousel :interval="4000" type="card" height="300px" :initial-index="0">
     <el-carousel-item v-for="item,index in bannerList" :key="index">
-      <!-- <pre> {{ item }} </pre> -->
+      <pre> {{ item }} </pre>
       <img style="width: 100%; height: 100%;" :src="item.imageUrl" />
-      <!-- <h1 style="color:black"> {{item.imageUrl}} </h1> -->
+      <h1 style="color:black"> {{item.imageUrl}} </h1>
     </el-carousel-item>
   </el-carousel>
+  <div>
+    <li v-for="item,index in bannerList" class="list-item" :key="index">
+      <img :src="item.imageUrl" alt="">
+    </li>
+  </div>
 </template>
 <script lang='ts' setup>
-import axios from '@/server/axios'
+// import axios from '@/server/axios'
+import axios from 'axios'
 import { ref, reactive, toRefs, onBeforeMount, onMounted } from 'vue'
 const bannerList = ref<any[]>([{}, {}, {}])
 const numTest = [{
@@ -17,15 +23,18 @@ const numTest = [{
   name: 2
 }]
 onMounted(() => {
+  console.log('ismounted')
+  // axios.get('/banner').then((res) => {
+  //   bannerList.value = res.data
+  // }).catch((e) => {
+  //   console.log(e)
+  // })
   axios({
-    url: 'bannerList',
     method: 'get',
-    data: {}
+    url: '/banner',
+    params: ''
   }).then(res => {
-    bannerList.value = res.banners
-    console.log(bannerList.value[0], ';bannerlist')
-  }).catch((e) => {
-    console.log(e)
+    console.log(res)
   })
 })
 
