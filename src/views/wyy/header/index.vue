@@ -41,9 +41,10 @@
 </template>
 
 <script lang='ts' setup>
+import { login } from '@/server/headerServer'
 import loginDialog from '@/components/loginDialog.vue'
 // import axios from '@/server/axios'
-import axios from 'axios'
+// import axios from 'axios'
 import { ref, defineEmits, computed, defineProps, watch, onMounted } from 'vue'
 import testJson from './navList.json'
 import $store from '@/store'

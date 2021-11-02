@@ -13,7 +13,7 @@
           <el-input v-model="formData.password"></el-input>
         </el-form-item>
       </el-form>
-      <el-button class="action" @click="login(formData)">确定</el-button>
+      <el-button class="action" @click="loginAction(formData)">确定</el-button>
       <el-button class="cancel" @click="cancal">取消</el-button>
     </el-dialog>
     <!-- </teleport> -->
@@ -22,7 +22,8 @@
 <script lang='ts' setup>
 import { ref, toRefs, onBeforeMount, watch, computed, defineProps } from 'vue'
 import $store from '@/store'
-import axios from '@/server/axios'
+// import axios from '@/server/axios'
+import headerServer from '@/server/headerServer'
 import { ElMessage } from 'element-plus'
 const dialogVisible = computed(() => $store.state.openBox)
 const props = defineProps({
@@ -59,9 +60,17 @@ const verify = (data: loginInfo): boolean => {
   }
   return true
 }
-const login = (data: loginInfo):void => {
+const loginAction = (data: loginInfo):void => {
   if (verify(data)) {
     console.log('coming', data)
+    headerServer.login(data).then(res => {
+      console.log(res, 'resssssssa')
+      if (res && res.code === 200) {
+        $store.dispatch('SET_ISLOGIN', true)
+        $store.dispatch('SET_USERINFO', res.profile)
+        $store.dispatch('SET_OPENBOX', false)
+      }
+    })
     // axios({
     //   url: 'loginMusic',
     //   method: 'GET',

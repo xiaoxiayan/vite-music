@@ -61,6 +61,6 @@ export interface artistList {
     initial?: string
 }
 export interface loginInfo {
-    myphone: string,
-    passWord: string
+    phone: string,
+    password: string
 }

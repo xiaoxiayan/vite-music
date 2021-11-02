@@ -2,8 +2,9 @@ import ElementPlus from 'element-plus'
 import myheader from '../index.vue'
 import logDialog from '@/components/loginDialog'
 import testBox from '@/components/test-element'
-import { login } from '@/server/test_getData'
+// import { login } from '@/server/test_getData'
 import axios from '@/server/axios'
+
 import {
   mount,
   shallowMount,
@@ -11,17 +12,16 @@ import {
 } from '@vue/test-utils'
 import store from '@/store'
 
-jest.mock('axios')
+// jest.mock('@/server/headerServer.ts', () => (
+//   {
+//     __esModule: true,
+//     login: jest.fn((data) => ({
+//       userName: 'xxp',
+//       avatarUrl: 'xxp.com'
+//     }))
+//   }
+// ))
 
-jest.mock('@/server/test_getData.js', () => (
-  {
-    __esModule: true,
-    login: jest.fn((data) => ({
-      userName: 'xxp',
-      avatarUrl: 'xxp.com'
-    }))
-  }
-))
 // describe('测试登陆按钮打开dialog', () => {F
 //   const mockComponent = {
 //     template: '<div><slot></slot></div>'
@@ -131,7 +131,7 @@ describe('header 组件', () => {
     // console.log(wrapper.vm.searchVal /*  */, '-+---value')
     expect(wrapper.find('.searchSpan').text()).toBe('aaaaaa')
   })
-  test('集成测试点击dialog。 setValue, 登陆', async () => {
+  test('集成测试点击dialog。 setValue, 登陆', async (done) => {
     const wrapper = mount(myheader, {
       global: {
         plugins: [ElementPlus]
@@ -147,10 +147,15 @@ describe('header 组件', () => {
     await inputList[1].setValue('a690150')
     const formData = dialogWrapper.findComponent({ name: 'el-form' }).vm.model
     expect(formData).toEqual({ phone: '18976203568', password: 'a690150' })
-    // await dialogWrapper.find('.action').trigger('click')
-    const res = await login(formData)
-    expect(res).toEqual({ userName: 'xxp', avatarUrl: 'xxp.com' })
-    // expect(wrapper.find('.userAvatar').exists()).toBe(true)
+    await dialogWrapper.find('.action').trigger('click')
+    dialogWrapper.vm.$nextTick(() => {
+      dialogWrapper.vm.$nextTick(() => {
+        console.log(dialogWrapper.vm.formData)
+        expect(wrapper.find('.userAvatar').exists()).toBe(true)
+        done()
+      })
+    })
+    // expect(res).toEqual({ userName: 'xxp', avatarUrl: 'xxp.com' })
     // await wrapper.find('.userAvatar').trigger('click')
     // expect(wrapper.find('.userInfoList').isVisible()).toBe(true)
     // 点击头像，弹窗个人列表
