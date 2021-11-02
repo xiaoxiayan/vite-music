@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const bannerList = {
   success: true,
   code: 200,
@@ -10,11 +12,9 @@ const bannerList = {
     { imageUrl: 'http://img.desktx.com/d/file/wallpaper/scenery/20170303/dfe53a7300794009a029131a062836d5.jpg' }
   ]
 }
-
 export default {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   get (url) {
-    console.log(url, '---ur;l')
     if (url === '/banner') {
       return new Promise((resolve) => {
         resolve(bannerList)

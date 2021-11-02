@@ -3,12 +3,15 @@ import myheader from '../index.vue'
 import logDialog from '@/components/loginDialog'
 import testBox from '@/components/test-element'
 import { login } from '@/server/test_getData'
+import axios from '@/server/axios'
 import {
   mount,
   shallowMount,
   flushPromises
 } from '@vue/test-utils'
 import store from '@/store'
+
+jest.mock('axios')
 
 jest.mock('@/server/test_getData.js', () => (
   {
