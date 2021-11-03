@@ -23,19 +23,18 @@ const numTest = [{
   name: 2
 }]
 onMounted(() => {
-  console.log('ismounted')
-  // axios.get('/banner').then((res) => {
-  //   bannerList.value = res.data
-  // }).catch((e) => {
-  //   console.log(e)
-  // })
-  axios({
-    method: 'get',
-    url: '/banner',
-    params: ''
-  }).then(res => {
-    console.log(res)
+  axios.get('/banner').then((res) => {
+    bannerList.value = res.data
+  }).catch((e) => {
+    console.log(e)
   })
+  // axios({
+  //   method: 'get',
+  //   url: '/banner',
+  //   params: ''
+  // }).then(res => {
+  //   console.log(res)
+  // })
 })
 
 </script>
